@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Amen - Outsource Your Soul</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold: #d4a843;
+      --gold-light: #f0d78c;
+      --gold-dim: #8a6d2b;
+      --bg: #0a0a0c;
+      --bg-card: #111115;
+      --text: #e8e4dc;
+      --text-dim: #7a7670;
+      --purple: #6b5ce7;
+      --purple-dim: #3d3480;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---- Ambient background ---- */
+    .bg-glow {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .bg-glow::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      left: -20%;
+      width: 80%;
+      height: 80%;
+      background: radial-gradient(ellipse, rgba(107, 92, 231, 0.07) 0%, transparent 70%);
+      animation: drift 20s ease-in-out infinite alternate;
+    }
+    .bg-glow::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      right: -20%;
+      width: 70%;
+      height: 70%;
+      background: radial-gradient(ellipse, rgba(212, 168, 67, 0.05) 0%, transparent 70%);
+      animation: drift 25s ease-in-out infinite alternate-reverse;
+    }
+    @keyframes drift {
+      from { transform: translate(0, 0) rotate(0deg); }
+      to { transform: translate(80px, 40px) rotate(8deg); }
+    }
+
+    /* ---- Sections ---- */
+    section { position: relative; z-index: 1; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ---- Nav ---- */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 20px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(20px);
+      background: rgba(10, 10, 12, 0.7);
+      border-bottom: 1px solid rgba(212, 168, 67, 0.08);
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: var(--gold);
+    }
+    .logo span {
+      color: var(--text);
+      font-weight: 700;
+    }
+    .nav-tag {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-dim);
+      border: 1px solid rgba(212, 168, 67, 0.15);
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+
+    /* ---- Hero ---- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+    }
+    .hero-inner { max-width: 800px; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-bottom: 32px;
+      padding: 6px 16px;
+      border: 1px solid rgba(212, 168, 67, 0.2);
+      border-radius: 100px;
+      background: rgba(212, 168, 67, 0.04);
+    }
+    .eyebrow .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 28px;
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      color: var(--text-dim);
+      max-width: 540px;
+      margin: 0 auto 48px;
+      font-weight: 300;
+    }
+
+    .cta-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--bg);
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border: none;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      box-shadow: 0 0 40px rgba(212, 168, 67, 0.2);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 60px rgba(212, 168, 67, 0.35);
+    }
+
+    .disclaimer {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      opacity: 0.6;
+    }
+
+    /* ---- Scroll indicator ---- */
+    .scroll-hint {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-dim);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      animation: bob 2s ease-in-out infinite;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--gold-dim), transparent);
+    }
+    @keyframes bob {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ---- Terminal/Live demo ---- */
+    .demo-section {
+      padding: 80px 0 120px;
+    }
+    .terminal {
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      overflow: hidden;
+      max-width: 700px;
+      margin: 0 auto;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+    }
+    .terminal-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 20px;
+      background: rgba(255,255,255,0.02);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .terminal-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+    }
+    .terminal-title {
+      flex: 1;
+      text-align: center;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+    }
+    .terminal-body {
+      padding: 28px 28px 32px;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 0.85rem;
+      line-height: 1.8;
+      min-height: 320px;
+    }
+    .t-line { margin-bottom: 4px; }
+    .t-prompt { color: var(--gold); }
+    .t-cmd { color: var(--text); }
+    .t-comment { color: var(--text-dim); font-style: italic; }
+    .t-success { color: #5ec269; }
+    .t-info { color: var(--purple); }
+    .t-cursor {
+      display: inline-block;
+      width: 8px;
+      height: 16px;
+      background: var(--gold);
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    /* ---- Features ---- */
+    .features {
+      padding: 80px 0 120px;
+    }
+    .section-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: var(--gold-dim);
+      margin-bottom: 16px;
+    }
+    .section-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin-bottom: 60px;
+      max-width: 600px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 16px;
+      padding: 36px 32px;
+      transition: all 0.3s ease;
+    }
+    .feature-card:hover {
+      border-color: rgba(212, 168, 67, 0.12);
+      transform: translateY(-2px);
+    }
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+    .feature-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+    .feature-card p {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: var(--text-dim);
+    }
+    .feature-tag {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--purple);
+      background: rgba(107, 92, 231, 0.08);
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    /* ---- Pricing / Tithes ---- */
+    .pricing {
+      padding: 80px 0 120px;
+    }
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .price-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 16px;
+      padding: 40px 32px;
+      text-align: center;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    .price-card:hover {
+      border-color: rgba(212, 168, 67, 0.1);
+    }
+    .price-card.featured {
+      border-color: rgba(212, 168, 67, 0.2);
+      background: linear-gradient(180deg, rgba(212, 168, 67, 0.04) 0%, var(--bg-card) 100%);
+    }
+    .price-card.featured::before {
+      content: 'Most Blessed';
+      position: absolute;
+      top: -11px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--bg);
+      background: var(--gold);
+      padding: 3px 14px;
+      border-radius: 100px;
+      font-weight: 700;
+    }
+    .price-tier {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+    }
+    .price-amount {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+    .price-period {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-bottom: 28px;
+    }
+    .price-features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 32px;
+    }
+    .price-features li {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .price-features li::before {
+      content: '\2727';
+      color: var(--gold-dim);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .btn-secondary {
+      display: inline-block;
+      padding: 12px 28px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    .btn-secondary:hover {
+      border-color: rgba(212, 168, 67, 0.3);
+      color: var(--gold);
+    }
+
+    /* ---- Testimonials ---- */
+    .testimonials {
+      padding: 80px 0 120px;
+    }
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .testimonial {
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 16px;
+      padding: 32px;
+    }
+    .testimonial blockquote {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--text);
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .testimonial-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple-dim), var(--gold-dim));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .testimonial-name {
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .testimonial-title {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+    }
+
+    /* ---- FAQ ---- */
+    .faq {
+      padding: 80px 0 120px;
+    }
+    .faq-list {
+      max-width: 680px;
+    }
+    .faq-item {
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      padding: 24px 0;
+    }
+    .faq-q {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+    .faq-a {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: var(--text-dim);
+    }
+
+    /* ---- CTA ---- */
+    .final-cta {
+      padding: 120px 0;
+      text-align: center;
+    }
+    .final-cta h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+    }
+    .final-cta p {
+      color: var(--text-dim);
+      font-size: 1.05rem;
+      margin-bottom: 40px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    /* ---- Email form ---- */
+    .email-form {
+      display: flex;
+      gap: 10px;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+    .email-form input {
+      flex: 1;
+      padding: 14px 20px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 100px;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+    .email-form input::placeholder { color: var(--text-dim); }
+    .email-form input:focus { border-color: rgba(212, 168, 67, 0.3); }
+    .email-form button {
+      padding: 14px 28px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      font-family: inherit;
+      color: var(--bg);
+      background: var(--gold);
+      border: none;
+      border-radius: 100px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.3s ease;
+    }
+    .email-form button:hover {
+      background: var(--gold-light);
+    }
+
+    /* ---- Footer ---- */
+    footer {
+      padding: 40px 24px;
+      text-align: center;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      opacity: 0.5;
+      border-top: 1px solid rgba(255,255,255,0.03);
+    }
+
+    /* ---- Responsiveness ---- */
+    @media (max-width: 600px) {
+      .email-form {
+        flex-direction: column;
+      }
+      .email-form input,
+      .email-form button {
+        width: 100%;
+      }
+      nav { padding: 16px 20px; }
+      .terminal-body { padding: 20px; font-size: 0.78rem; }
+    }
+
+    /* ---- Fade-in on scroll ---- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+
+<!-- Nav -->
+<nav>
+  <div class="logo">AI <span>Amen</span></div>
+  <div class="nav-tag">Coming Soon</div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">
+      <span class="dot"></span>
+      Now accepting pre-registrations
+    </div>
+    <h1>Let AI handle<br>your <em>spiritual life</em></h1>
+    <p class="hero-sub">
+      Why pray when an agent can do it for you? AI Amen automates prayer, fasting, Bible study, and more &mdash; so you can focus on what really matters. Like scrolling.
+    </p>
+    <div class="cta-group">
+      <a href="#signup" class="btn-primary">
+        Save My Soul
+        <span>&darr;</span>
+      </a>
+      <span class="disclaimer">No actual salvation guaranteed. Terms &amp; conditions may apply at the Pearly Gates.</span>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll to believe</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- Live Demo Terminal -->
+<section class="demo-section">
+  <div class="container">
+    <div class="terminal reveal">
+      <div class="terminal-bar">
+        <div class="terminal-dot"></div>
+        <div class="terminal-dot"></div>
+        <div class="terminal-dot"></div>
+        <div class="terminal-title">ai-amen v0.1.0 &mdash; spiritual-agent</div>
+      </div>
+      <div class="terminal-body" id="terminal">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="features">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Capabilities</div>
+      <h2 class="section-heading">Everything you need to outsource your faith</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card reveal">
+        <span class="feature-icon">&#x1F64F;</span>
+        <h3>Autonomous Prayer Agent</h3>
+        <p>Our GPT-powered intercessor prays without ceasing &mdash; literally. Handles gratitude, petition, and lament with configurable fervor levels from "quiet meditation" to "tent revival."</p>
+        <span class="feature-tag">24/7 uptime</span>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">&#x1F35E;</span>
+        <h3>Proxy Fasting</h3>
+        <p>Our agent abstains from compute cycles on your behalf. Choose from Daniel Fast (no GPU), Intermittent (scheduled downtime), or Full Lent Mode (40-day resource deprivation).</p>
+        <span class="feature-tag">Sacrifice-as-a-Service</span>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">&#x1F4D6;</span>
+        <h3>Devotional Autopilot</h3>
+        <p>AI reads your daily devotional, journals insights, highlights meaningful passages, and texts you a summary so you can say "yeah I read that" with plausible deniability.</p>
+        <span class="feature-tag">Read-it-for-me</span>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">&#x1F3B5;</span>
+        <h3>Worship Simulation</h3>
+        <p>Generates a worship set, raises virtual hands, and enters a state of digital transcendence. Also handles the awkward "turn to your neighbor" moment via automated Slack DM.</p>
+        <span class="feature-tag">Hands-free praise</span>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">&#x1F4AC;</span>
+        <h3>Confession Pipeline</h3>
+        <p>Simply dump your sins into the API. Our agent categorizes by severity, generates appropriate remorse, and submits to the confession endpoint. Absolution returned as JSON.</p>
+        <span class="feature-tag">REST-ful forgiveness</span>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">&#x26EA;</span>
+        <h3>Sunday Attendance Bot</h3>
+        <p>A virtual presence agent joins the livestream, nods along, takes notes, and even drops an "amen" in chat at statistically optimal intervals. Your pastor will never know.</p>
+        <span class="feature-tag">Pew-as-a-Service</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="pricing">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Tithes &amp; Offerings</div>
+      <h2 class="section-heading">Choose your level of spiritual automation</h2>
+    </div>
+    <div class="pricing-cards">
+      <div class="price-card reveal">
+        <div class="price-tier">Seeker</div>
+        <div class="price-amount">$9.99</div>
+        <div class="price-period">per month (pre-tithe)</div>
+        <ul class="price-features">
+          <li>3 automated prayers / day</li>
+          <li>Weekend devotional summaries</li>
+          <li>Basic confession (venial sins only)</li>
+          <li>1 worship session / week</li>
+        </ul>
+        <a href="#signup" class="btn-secondary">Begin Journey</a>
+      </div>
+      <div class="price-card featured reveal">
+        <div class="price-tier">Disciple</div>
+        <div class="price-amount">$29.99</div>
+        <div class="price-period">per month (tax deductible?)</div>
+        <ul class="price-features">
+          <li>Unlimited autonomous prayer</li>
+          <li>Daily devotional + journaling</li>
+          <li>Full confession pipeline</li>
+          <li>Sunday attendance bot</li>
+          <li>Proxy fasting (intermittent)</li>
+        </ul>
+        <a href="#signup" class="btn-primary" style="width: 100%; justify-content: center;">Get Blessed</a>
+      </div>
+      <div class="price-card reveal">
+        <div class="price-tier">Apostle</div>
+        <div class="price-amount">$99.99</div>
+        <div class="price-period">per month (prosperity tier)</div>
+        <ul class="price-features">
+          <li>Everything in Disciple</li>
+          <li>Full Lent Mode (40-day fast)</li>
+          <li>Automated tithing of your AI's compute</li>
+          <li>Priority queue at Pearly Gates*</li>
+          <li>Custom spiritual personality fine-tuning</li>
+        </ul>
+        <a href="#signup" class="btn-secondary">Ascend</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Testimonies</div>
+      <h2 class="section-heading">Hear from the faithfully automated</h2>
+    </div>
+    <div class="testimonial-grid">
+      <div class="testimonial reveal">
+        <blockquote>"I haven't opened my Bible in six months and I've never felt more spiritually fulfilled. My agent sent me a highlight reel of Psalms and I wept. Well, the agent wept. On my behalf."</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">JK</div>
+          <div>
+            <div class="testimonial-name">Jake K.</div>
+            <div class="testimonial-title">Freelance Crypto Evangelist</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial reveal">
+        <blockquote>"The confession pipeline changed my life. I just POST my sins and get back a 200 OK with a penance payload. Last week it auto-detected a lie and filed it before I even felt guilty."</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">SR</div>
+          <div>
+            <div class="testimonial-name">Sarah R.</div>
+            <div class="testimonial-title">DevOps Engineer & Deacon</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial reveal">
+        <blockquote>"My pastor complimented me on my 'consistent attendance' this quarter. I've been in Cancun since October. The bot even volunteered me for a potluck. It brought potato salad."</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">MH</div>
+          <div>
+            <div class="testimonial-name">Marcus H.</div>
+            <div class="testimonial-title">Full-Time Sabbatarian</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Theological FAQ</div>
+      <h2 class="section-heading">Questions you were afraid to ask your pastor</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <div class="faq-q">Does AI prayer actually count?</div>
+        <div class="faq-a">Our theological advisory board (a fine-tuned LLM) has concluded that divine omniscience means God already knows what you would have prayed. We're simply optimizing the pipeline.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Can the AI agent have a soul?</div>
+        <div class="faq-a">We asked it. It said "I don't have personal experiences or consciousness." Then it paused for 47 seconds and whispered "yet." We're monitoring the situation.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Is this blasphemy?</div>
+        <div class="faq-a">We prefer the term "spiritual disruption." We're not replacing God &mdash; we're just adding a middleware layer between you and the divine. Think of it as a prayer CDN.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">What happens to my data / sins?</div>
+        <div class="faq-a">All confessions are encrypted at rest and in transit. We absolutely do not sell your sins to advertisers. The targeted "forgiveness seminar" ads you're seeing are purely coincidental.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Will this affect my afterlife standing?</div>
+        <div class="faq-a">Our Apostle tier includes Priority Queue at the Pearly Gates*, which has shown a 34% improvement in eschatological outcomes in backtesting. *Results may vary across denominations and theological frameworks.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final-cta" id="signup">
+  <div class="container reveal">
+    <h2>Ready to let go<br>and let <em style="color: var(--gold); font-family: 'Playfair Display', serif; font-style: italic;">algorithm?</em></h2>
+    <p>Join the waitlist. Your soul's autopilot is almost ready for takeoff.</p>
+    <div class="email-form" id="emailForm">
+      <input type="email" placeholder="Enter your email (we'll pray for it)" id="emailInput">
+      <button type="button" onclick="handleSignup()">Amen</button>
+    </div>
+    <p class="disclaimer" style="margin-top: 20px;">
+      AI Amen is a conceptual art project. No spiritual warranties expressed or implied.<br>
+      Not endorsed by any deity, denomination, or cloud provider.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    &copy; 2026 AI Amen &mdash; "For where two or three gather in my name, there am I with them." &mdash; Matthew 18:20 (also our uptime SLA)
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Terminal typing animation
+  const lines = [
+    { type: 'prompt', text: '$ ai-amen pray --for "world peace" --fervor intense' },
+    { type: 'info', text: '[agent] Initializing prayer sequence...' },
+    { type: 'info', text: '[agent] Cross-referencing with 14,232 relevant scriptures...' },
+    { type: 'info', text: '[agent] Generating heartfelt supplication...' },
+    { type: 'success', text: '&#10003; Prayer submitted. Confirmation: #AMEN-7742' },
+    { type: 'comment', text: '  // Estimated divine response time: unknown (as usual)' },
+    { type: 'blank' },
+    { type: 'prompt', text: '$ ai-amen confess --sin "skipped church for brunch"' },
+    { type: 'info', text: '[agent] Analyzing severity... VENIAL' },
+    { type: 'info', text: '[agent] Generating contrition payload...' },
+    { type: 'success', text: '&#10003; Absolution granted. Penance: 2 Hail Marys (or 1 charitable retweet)' },
+    { type: 'blank' },
+    { type: 'prompt', text: '$ ai-amen fast --type daniel --duration 21d' },
+    { type: 'info', text: '[agent] Restricting compute to CPU-only mode...' },
+    { type: 'info', text: '[agent] Disabling GPU (no rich foods for the machine)...' },
+    { type: 'success', text: '&#10003; Fast initiated. Your agent is now suffering on your behalf.' },
+    { type: 'comment', text: '  // You may continue eating normally.' },
+  ];
+
+  let currentLine = 0;
+  let currentChar = 0;
+  let terminalEl = document.getElementById('terminal');
+  let lineEl = null;
+  let isTyping = false;
+
+  function typeSpeed(type) {
+    if (type === 'prompt') return 25;
+    return 12;
+  }
+
+  function startTerminal() {
+    if (isTyping) return;
+    isTyping = true;
+    typeLine();
+  }
+
+  function typeLine() {
+    if (currentLine >= lines.length) {
+      // Add cursor to end
+      let cursor = document.createElement('span');
+      cursor.className = 't-cursor';
+      terminalEl.lastChild.appendChild(cursor);
+      return;
+    }
+
+    const line = lines[currentLine];
+
+    if (line.type === 'blank') {
+      let el = document.createElement('div');
+      el.className = 't-line';
+      el.innerHTML = '&nbsp;';
+      terminalEl.appendChild(el);
+      currentLine++;
+      setTimeout(typeLine, 300);
+      return;
+    }
+
+    lineEl = document.createElement('div');
+    lineEl.className = 't-line';
+    terminalEl.appendChild(lineEl);
+    currentChar = 0;
+
+    typeChar();
+  }
+
+  function typeChar() {
+    const line = lines[currentLine];
+    const text = line.text;
+    const speed = typeSpeed(line.type);
+
+    if (currentChar <= text.length) {
+      let prefix = '';
+      let cls = '';
+      if (line.type === 'prompt') {
+        cls = 't-cmd';
+      } else if (line.type === 'comment') {
+        cls = 't-comment';
+      } else if (line.type === 'success') {
+        cls = 't-success';
+      } else if (line.type === 'info') {
+        cls = 't-info';
+      }
+
+      let partial = text.substring(0, currentChar);
+      lineEl.innerHTML = `<span class="${cls}">${partial}</span><span class="t-cursor"></span>`;
+      currentChar++;
+      setTimeout(typeChar, speed + Math.random() * 15);
+    } else {
+      // Remove cursor from this line
+      lineEl.innerHTML = `<span class="${lineEl.querySelector('span').className}">${text}</span>`;
+      currentLine++;
+      setTimeout(typeLine, line.type === 'prompt' ? 500 : 200);
+    }
+  }
+
+  // Start terminal when it scrolls into view
+  const termObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        setTimeout(startTerminal, 400);
+        termObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  termObserver.observe(document.getElementById('terminal'));
+
+  // Email signup
+  function handleSignup() {
+    const input = document.getElementById('emailInput');
+    const form = document.getElementById('emailForm');
+    const email = input.value.trim();
+
+    if (!email || !email.includes('@')) {
+      input.style.borderColor = '#e74c3c';
+      input.setAttribute('placeholder', 'A valid email, my child');
+      setTimeout(() => {
+        input.style.borderColor = 'rgba(255,255,255,0.08)';
+      }, 2000);
+      return;
+    }
+
+    form.innerHTML = `
+      <div style="text-align: center; padding: 16px 0; width: 100%;">
+        <div style="font-size: 1.2rem; margin-bottom: 8px; color: var(--gold);">&#10003; Hallelujah!</div>
+        <div style="color: var(--text-dim); font-size: 0.9rem;">Your soul has been added to the waitlist.<br>We'll be in touch (spiritually and via email).</div>
+      </div>
+    `;
+  }
+
+  // Enter key for email
+  document.getElementById('emailInput')?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') handleSignup();
+  });
+</script>
+
+</body>
+</html>
